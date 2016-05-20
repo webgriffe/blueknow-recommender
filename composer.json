@@ -1,0 +1,12 @@
+{
+    "name": "blueknow/recommender",
+    "type": "magento-module",
+    "license":"OSL-3.0",
+    "description":"Magento extension for BlueKnow Recommender.",
+    "authors":[
+        {
+            "name":"Blueknow",
+            "email":"contact@blueknow.com"
+        }
+    ]
+}
