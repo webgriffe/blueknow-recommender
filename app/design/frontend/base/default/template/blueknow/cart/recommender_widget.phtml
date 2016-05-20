@@ -1,0 +1,51 @@
+<?php
+/**
+ * Template for Blueknow_Recommender_Block_Cart_Recommmender.
+ * 
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Blueknow Recommender
+ * extension to newer versions in the future. If you wish to customize it for
+ * your needs please save your changes before upgrading.
+ * 
+ * @category	design
+ * @copyright	Copyright (c) 2013 Blueknow, S.L. (http://www.blueknow.com)
+ * @license		GNU General Public License
+ * @author		<a href="mailto:santi.ameller@blueknow.com">Santiago Ameller</a>
+ * @author		<a href="mailto:josep.ventura@blueknow.com">Josep M Ventura</a>
+ * @since		1.0.0
+ * 
+ */
+?>
+<div id="blueknow-widget"></div>
+<?php $bConfiguration = $this->getConfig(); ?>
+
+<script id="blueknow-header" type="text/x-blueknow-template">
+	<div><h2><?php echo $this->__('Customers who bought these products also bought') ?></h2></div>
+</script>
+
+<?php
+//[2011-03-14] Issue MAGPLUGIN-3: Unexpected page loading whenever widget is rendered.
+//			   Header mark of any string-to-replace has been changed from "#" to "$".
+//			   Additionally, <img /> tag has been changed to avoid unexpected requests ("src" was replaced by "source").
+?>
+<script id="blueknow-template" type="text/x-blueknow-template">
+	<div class="products-grid blueknow-cart-products-grid">
+		<div class="blueknow-product">
+			<a href="$url" title="$name" class="product-image blueknow-cart-product-image"
+				onclick="try { rec.onclick('$id','item2basket','cart');} catch(err) {};">
+				<img source="$image" alt="$name" title="$name" width="100" height="100" hspace="0" vspace="0" border="0" />
+			</a>
+			<h3 class="product-name"><a href="$url" title="$name" 
+				onclick="try { rec.onclick('$id','item2basket','cart');} catch(err) {};">
+				$name</a></h3>
+			<div class="price-box">
+				<span class="regular-price">
+					<span class="price">$price <?php echo $bConfiguration->getCurrentCurrency()->getSymbol() ?></span>
+				</span>
+			</div>
+		</div>
+	</div>
+</script>
+
+<?php echo $this->getChildHtml('cart_recommender_widget_footer') ?>

@@ -1,0 +1,68 @@
+/* General CSS properties and product page default ones */
+#blueknow-widget {
+	margin-top: 20px;
+}
+
+/* Recommender widget title */
+#blueknow-widget h2 {
+	font-weight: bold;
+	font-size: 15px;
+	color: #e26703;
+}
+
+.blueknow-product {
+	padding: 10px;
+}
+
+.blueknow-product img {
+	border: 1px solid #e5dcc3;
+}
+
+/* Widget layout and properties (Product page) */
+.blueknow-products-grid {
+	float: left;
+	width: 156px !important;
+	height: 250px;
+	background-color: #f6f2e7;
+	border: 1px solid #e5dcc3;
+}
+
+/* Shopping cart page specific CSS properties */
+.blueknow-cart-product-image {
+	width: 110px !important;
+	height: 110px !important;
+}
+
+/* Widget layout and properties (Cart page) */
+.blueknow-cart-products-grid {
+	float: left;
+	width: 126px !important;
+	height: 235px;
+	background-color: #fafaec;
+	border: 1px solid #e5dcc3;
+}
+
+/* Home page specific CSS properties */
+.blueknow-home-widget {
+	display: block;
+	padding-left: 215px;
+}
+
+/* Recommender widget Home page title */
+.blueknow-home-widget h2{
+	line-height: 25px;
+}
+
+/* Widget layout and properties (Home page) */
+.blueknow-home-products-grid {
+	float: left;
+	width: 154px !important;
+	height: 235px;
+	background-color: #fafaec;
+	border: 1px solid #e5dcc3;
+}
+
+.blueknow-home-product-image {
+	width: 120px !important;
+	height: 120px !important;
+}
