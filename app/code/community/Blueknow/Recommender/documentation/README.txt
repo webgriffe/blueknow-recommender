@@ -1,9 +1,10 @@
 /**
  * Blueknow Recommender for Magento.
  * 
- * @copyright	Copyright (c) 2009-2011 Blueknow, S.L. (http://www.blueknow.com)
+ * @copyright	Copyright (c) 2009-2015 Blueknow, S.L. (http://www.blueknow.com)
  * @license		GNU General Public License
  * @author		<a href="mailto:santi.ameller@blueknow.com">Santiago Ameller</a>
+ * @author		<a href="mailto:josep.ventura@blueknow.com">Josep M Ventura</a>
  * 
  */
 
@@ -12,9 +13,9 @@ About the module
 
 	* Name:          Blueknow Recommender for Magento eCommerce platform (v1.3.x or higher).
 	* Description:   Personalized product recommendations for your eCommerce: cross-sell and up-sell.
-	* Version:       1.2.0.
+	* Version:       1.3.0.
 
-	NOTE: this module has been successfully tested on Magento 1.3.x or higher. If your eCommerce runs under an older version, please contact with us at support@blueknow.com.
+	NOTE: this module has been successfully tested on Magento 1.3.x to 1.8. If your eCommerce runs under an older version, please contact with us at support@blueknow.com.
 	
 Important notes
 ===============
@@ -52,6 +53,18 @@ How to install
 
 Change log
 ==========
+Version 1.3.0
+-------------
+
+	Stable version including new improvements and some bug fixings.
+	
+	+ [MAGPLUGIN-22] to [MAGPLUGIN-43]. 
+		+ Price format improvements.
+		+ Platform API inclusion.
+		+ Fixed bugs on configurable, grouped and bundle products.
+		+ Improvements on category recommendations.
+		+ Other bug fixings.
+	
 
 Version 1.2.0
 -------------

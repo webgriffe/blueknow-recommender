@@ -17,7 +17,22 @@
  * @since		1.0.0
  * 
  */
+include_once(Mage::getBaseDir('code') . "/community/Blueknow/Recommender/api/BlueknowPlatformAPIzend.php");
 class Blueknow_Recommender_Model_Observer {
+	
+	/**
+	 * Platform api
+	 */
+	private $_api;
+	
+	/**
+	 * Default Observer constructor.
+	 */
+	//[20-02-2013] MAGPLUGIN-37. Externalize platform API.
+	public function __construct() {
+		//Get API and discontinue
+		$this->_api = BlueknowPlatformAPIzend::getInstance();
+	}
 	
 	/**
 	 * Activate new-login flag from Blueknow Recommender session scope.
@@ -42,14 +57,14 @@ class Blueknow_Recommender_Model_Observer {
 	public function discontinueProduct(Varien_Event_Observer $observer) {
 		//Get the order
 		$order= $observer->getEvent()->getOrder();
-		//Retrieve api
-		$api = Mage::getSingleton('blueknow_recommender/platformApiService');
+		//Iterate through order items
 		foreach ($order->getItemsCollection() as $item) {
 			//Get the remaining stock quantity
 			$stockQuantity = (int)Mage::getModel('cataloginventory/stock_item')->loadByProduct($item->getProductId())->getQty();
+			//Check stock
 			if ($stockQuantity < 1) {
 				//Discontinue product
-				$api->discontinueProduct($item->getProductId());
+				$this->_discontinue($item->getProductId());
 			}
 		}		
 	}
@@ -92,14 +107,12 @@ class Blueknow_Recommender_Model_Observer {
 	
 	/**
 	 * Retrieve API instance and discontinue product
-	 * 
 	 */
 	protected function _discontinue($productId) {
 		//Check that we correctly retrieved productId.
 		if (isset($productId)) {
 			//Retrieve api and discontinue
-			$api = Mage::getSingleton('blueknow_recommender/platformApiService');
-			$api->discontinueProduct($productId);
+			$this->_api->discontinueProduct($productId);
 		}
 	}
 }

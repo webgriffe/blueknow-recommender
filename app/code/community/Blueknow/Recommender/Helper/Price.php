@@ -30,22 +30,22 @@ class Blueknow_Recommender_Helper_Price extends Mage_Core_Helper_Abstract {
 			//get product price model
 			$model = $product->getPriceModel();
 			//get product price
-			$price = $model->getFinalPrice(1, $product);
-			if ($price == 0) {
+			$defaultPrice = $model->getFinalPrice(1, $product);
+			if ($defaultPrice == 0) {
 				$type = $product->getTypeId();
 				switch ($type) {
 					case Mage_Catalog_Model_Product_Type::TYPE_BUNDLE:
-						$price = $this->getBundledProductMinimalPrice($product);
+						$defaultPrice = $this->getBundledProductMinimalPrice($product);
 						break;
 					case Mage_Catalog_Model_Product_Type::TYPE_GROUPED:
-						$price = $this->getGroupedProductMinimalPrice($product);
+						$defaultPrice = $this->getGroupedProductMinimalPrice($product);
 						break;
 					default:
-						$price = -1; //invalid price
+						$defaultPrice = -1; //invalid price
 				}
 			}
-			//TODO workaround: add tax
-			//$price = Mage::helper('tax')->getPrice($product, $price, true);
+			//[20-02-2013] MACPLUGIN-38 Add taxes to price (if taxes are displayed in product page).
+			$price = Mage::helper('tax')->getPrice($product, $defaultPrice, true);
 			//apply currency conversion
 			$price = Mage::helper('core')->currency($price, false, false);
 		} else {

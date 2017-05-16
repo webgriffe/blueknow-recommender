@@ -33,6 +33,7 @@ class Blueknow_Recommender_Helper_Data extends Mage_Core_Helper_Abstract {
 	/**
 	 * Single-simple-line transformation: no multiple line, no embedded HTML code. Also a truncation is applied.
 	 * @param string $string
+	 * @deprecated
 	 */
 	public function ssline($string) {
 		$string_helper = Mage::helper('core/string');

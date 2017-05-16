@@ -1,0 +1,44 @@
+<?php
+/**
+ * Template for Blueknow_Recommender_Block_Home_Recommmender.
+ * 
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Blueknow Recommender
+ * extension to newer versions in the future. If you wish to customize it for
+ * your needs please save your changes before upgrading.
+ * 
+ * @category	design
+ * @copyright	Copyright (c) 2013 Blueknow, S.L. (http://www.blueknow.com)
+ * @license		GNU General Public License
+ * @author		<a href="mailto:santi.ameller@blueknow.com">Santiago Ameller</a>
+ * @author		<a href="mailto:josep.ventura@blueknow.com">Josep M Ventura</a>
+ * @since		1.2.0
+ * 
+ */
+?>
+<div id="blueknow-widget" class="blueknow-home-widget"></div>
+<?php $bConfiguration = $this->getConfig();?>
+<script id="blueknow-header" type="text/x-blueknow-template">
+	<div><h2><?php echo $this->__('We recommend to you the following products') ?></h2></div>
+</script>
+<script id="blueknow-template" type="text/x-blueknow-template">
+	<div class="products-grid blueknow-home-products-grid">
+		<div class="blueknow-product">
+			<a href="$url" title="$name" class="product-image blueknow-home-product-image"
+				onclick="return rec.onclick('$id','item2user','home');" >
+				<img source="$image" alt="$name" title="$name" width="115" hspace="0" vspace="0" border="0" />
+			</a>
+			<h3 class="product-name"><a href="$url" title="$name"
+				onclick="return rec.onclick('$id','item2user','home');">
+				$name</a></h3>
+			<div class="price-box">
+				<span class="regular-price">
+					<span class="price">$price</span>
+				</span>
+			</div>
+		</div>
+	</div>
+</script>
+
+<?php echo $this->getChildHtml('product_recommender_widget_footer') ?>

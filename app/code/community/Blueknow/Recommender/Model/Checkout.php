@@ -82,13 +82,16 @@ class Blueknow_Recommender_Model_Checkout extends Varien_Object {
 		$bOrder->setTotal($store->roundPrice($order->getBaseGrandTotal()));
 		$bOrder->setTax($store->roundPrice($order->getBaseTaxAmount()));
 		$bOrder->setShipping($store->roundPrice($order->getBaseShippingAmount()));
+		//Iterate through order items
 		foreach ($order->getAllItems() as $item) {
+			//Found parent (configurable products, bundle also?)
 			if ($item->getParentItemId()) {
 				continue;
 			}
 			$bProduct = Mage::getModel('blueknow_recommender/Checkout_Product');
 			$bProduct->setId($item->getProductId());
-			$bProduct->setPrice($store->roundPrice($item->getBasePrice()));
+			//[20-02-2013] MACPLUGIN-38 Add taxes to price.
+			$bProduct->setPrice($store->roundPrice($item->getPriceInclTax()));
 			$bProduct->setQuantity(intval($item->getQtyOrdered()));
 			//get saleable information
 			$bProduct->setSaleable(Mage::getModel('catalog/product')->load($item->getProductId())->isSaleable());

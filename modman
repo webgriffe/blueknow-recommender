@@ -1,7 +1,7 @@
 app/code/community/Blueknow/Recommender                                     app/code/community/Blueknow/Recommender
 app/design/adminhtml/default/default/layout/blueknow_recommender.xml        app/design/adminhtml/default/default/layout/blueknow_recommender.xml
-app/design/frontend/base/default/layout/blueknow_recommender.xml            app/design/frontend/base/default/layout/blueknow_recommender.xml
-app/design/frontend/base/default/template/blueknow                          app/design/frontend/base/default/template/blueknow
+app/design/frontend/rwd/default/layout/blueknow_recommender.xml             app/design/frontend/rwd/default/layout/blueknow_recommender.xml
+app/design/frontend/rwd/default/template/blueknow                           app/design/frontend/rwd/default/template/blueknow
 app/etc/modules/Blueknow_Recommender.xml                                    app/etc/modules/Blueknow_Recommender.xml
 app/locale/de_DE/Blueknow_recommender.csv                                   app/locale/de_DE/Blueknow_recommender.csv
 app/locale/en_US/Blueknow_recommender.csv                                   app/locale/en_US/Blueknow_recommender.csv

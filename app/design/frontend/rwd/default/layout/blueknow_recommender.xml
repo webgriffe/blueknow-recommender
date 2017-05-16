@@ -30,7 +30,7 @@
 			<action method="addCss"><stylesheet>css/blueknow_recommender/blueknow_widget.css</stylesheet></action>
 			<action method="addItem">
 				<type>skin_js</type>
-				<name>js/blueknow_recommender/blueknow_recommender.min.js</name>
+				<name>js/blueknow_recommender/blueknow_recommender.js</name>
 			</action>	
 		</reference>
   		<reference name="content">
@@ -45,7 +45,7 @@
 			<action method="addCss"><stylesheet>css/blueknow_recommender/blueknow_widget.css</stylesheet></action>
 			<action method="addItem">
 				<type>skin_js</type>
-				<name>js/blueknow_recommender/blueknow_recommender.min.js</name>
+				<name>js/blueknow_recommender/blueknow_recommender.js</name>
 			</action>		
 		</reference>
 		<reference name="content">
@@ -58,12 +58,28 @@
 			<block type="blueknow_recommender/product_tracker" name="blueknow.product.tracker" as="product_tracker" template="blueknow/product/tracker.phtml" />
 		</reference>
 	</catalog_product_view>
+	<!-- [2013-02-15] MAGPLUGIN-39. Added category page recommendations. -->
+	<catalog_category_view>
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/blueknow_recommender/blueknow_widget.css</stylesheet></action>
+			<action method="addItem">
+				<type>skin_js</type>
+				<name>js/blueknow_recommender/blueknow_recommender.js</name>
+			</action>	
+		</reference>
+	 		<reference name="content">
+			<block type="blueknow_recommender/category_recommender" name="blueknow.category.recommender.widget" as="category_recommender_widget" template="blueknow/category/recommender_widget.phtml">
+				<block type="blueknow_recommender/base" name="blueknow.category.recommender.widget.footer" as="category_recommender_widget_footer" template="blueknow/common/recommender_widget_footer.phtml" />
+			</block>	
+			<block type="blueknow_recommender/category_recommender" name="blueknow.category.recommender" as="category_recommender" template="blueknow/category/recommender.phtml" />
+	 		</reference>
+	</catalog_category_view> 
 	<checkout_cart_index>
 		<reference name="head">
 			<action method="addCss"><stylesheet>css/blueknow_recommender/blueknow_widget.css</stylesheet></action>
 			<action method="addItem">
 				<type>skin_js</type>
-				<name>js/blueknow_recommender/blueknow_recommender.min.js</name>
+				<name>js/blueknow_recommender/blueknow_recommender.js</name>
 			</action>			
 		</reference>
 		<reference name="content">

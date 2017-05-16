@@ -31,9 +31,9 @@ class Blueknow_Recommender_Model_Cart extends Varien_Object {
 	 */
 	public function getProducts() {
 		if (!$this->_products) { //empty cart is directly returned
-			$cart = Mage::helper('checkout/cart')->getCart();
-			$ids = $cart->getProductIds();
-			$this->filterProductIds($ids);
+			//[06-03-2013] MAGPLUGIN-40, use new approach in cart
+			$this->_products = Mage::getSingleton('checkout/session')->getQuote()->getAllVisibleItems();
+			//Old approach for Grouped and others $this->filterProductIds();
 		}
 		return $this->_products;
 	}
@@ -42,8 +42,10 @@ class Blueknow_Recommender_Model_Cart extends Varien_Object {
 	 * Retrieve product ids after success checkout in order to track sold products.
 	 * 
 	 * @since 1.2.0.GA.
+	 * @deprecated
 	 */
 	//[04-01-2013] MAGPLUGIN-21. Track product IDs on checkout for every kind of product.
+	//[08-03-2013] MAGPLUGIN-40 Not used, deprecated. Only benefit to track parents of grouped products, deprecated method.
 	protected function filterProductIds($items) {
 		//Check if we have a bundle
 		$flagBundle = false;
@@ -54,7 +56,7 @@ class Blueknow_Recommender_Model_Cart extends Varien_Object {
 			//Retrieve original product in order to get TypeId
 			$product = Mage::getModel('catalog/product')->load($productId);
 			if (isset($product)) {
-				//Check product types		
+				//Check product types
 				switch ($product->getTypeId()) {
 					//	Bundle product
 					case Mage_Catalog_Model_Product_Type::TYPE_BUNDLE:
@@ -70,25 +72,32 @@ class Blueknow_Recommender_Model_Cart extends Varien_Object {
 						break;
 					//	Default case
 					default:
-						//Check for configurable parent
-						$parentIds = Mage::getModel('catalog/product_type_configurable')->getParentIdsByChild($productId);
-						//Check for bundle parent
-						if((!$parentIds) && ($flagBundle)) {
-							$parentIds = Mage::getModel('bundle/product_type')->getParentIdsByChild($productId);
-						}
-						//Retrieve parent and store
-						if($parentIds) {
-							//Check appropiate parent in our product id array
-							$index = $this->getParentIndex($parentIds, $trackerIds);
-							//Add the correct parent for id, otherwise skip
-							if(isset($index)){
-								array_push($trackerIds, $parentIds[$index]);
-							}
+						//[26-02-2013] MAGPLUGIN-40 Check for grouped products, same approach as configurable
+						$groupedParentIds = Mage::getModel('catalog/product_type_grouped')->getParentIdsByChild($productId);
+						if ($groupedParentIds) {
+							//Add unique array element (parent id) to tracker.
+							array_push($trackerIds, array_shift($groupedParentIds));
 						} else {
-							//Just default product
-							array_push($trackerIds, $productId);
+							//Check for configurable parent
+							$parentIds = Mage::getModel('catalog/product_type_configurable')->getParentIdsByChild($productId);
+							//Check for bundle parent
+							if((!$parentIds) && ($flagBundle)) {
+								$parentIds = Mage::getModel('bundle/product_type')->getParentIdsByChild($productId);
+							}
+							//Retrieve parent and store
+							if($parentIds) {
+								//Check appropiate parent in our product id array
+								$index = $this->getParentIndex($parentIds, $trackerIds);
+								//Add the correct parent for id, otherwise skip
+								if(isset($index)){
+									array_push($trackerIds, $parentIds[$index]);
+								}
+							//Just default simple product
+							} else {
+								array_push($trackerIds, $productId);
+							}
+							break;							
 						}
-						break;
 				}
 			}
 		}
@@ -103,7 +112,9 @@ class Blueknow_Recommender_Model_Cart extends Varien_Object {
 	 * @param array $trackerIds
 	 * @return number
 	 * @since 1.2.0.GA.
+	 * @deprecated
 	 */
+	//[08-03-2013] MAGPLUGIN-40 Not used, deprecated
 	private function getParentIndex($parentIds, $trackerIds) {
 		//Checking all parent ids
 		for ($i=0; $i < count($parentIds); $i++) {

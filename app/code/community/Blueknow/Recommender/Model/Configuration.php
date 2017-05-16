@@ -28,6 +28,8 @@ class Blueknow_Recommender_Model_Configuration extends Varien_Object {
 	const XML_PATH_BLUEKNOW_UP_SELL_NOR = 'blueknow/item_to_basket/nor';
 	const XML_PATH_BLUEKNOW_HOME_ENABLED = 'blueknow/item_to_user/enabled';
 	const XML_PATH_BLUEKNOW_HOME_NOR = 'blueknow/item_to_user/nor';
+	const XML_PATH_BLUEKNOW_CATEGORY_ENABLED = 'blueknow/item_to_category/enabled';
+	const XML_PATH_BLUEKNOW_CATEGORY_NOR = 'blueknow/item_to_category/nor';
 
 	/**
 	 * Blueknow Recommender extension descriptor/identifier.
@@ -73,15 +75,31 @@ class Blueknow_Recommender_Model_Configuration extends Varien_Object {
 	
 	/**
 	 * Home-recommendations-is-enabled flag.
+	 * @since 1.2.0
 	 * @var bool
 	 */
 	private $_homeEnabled;
 	
 	/**
 	 * Number of home recommendations to request.
+	 * @since 1.2.0
 	 * @var number
 	 */
 	private $_homeNOR;
+	
+	/**
+	 * Category-recommendations-is-enabled flag.
+	 * @since 1.3.0
+	 * @var bool
+	 */
+	private $_categoryEnabled;
+	
+	/**
+	 * Number of category recommendations to request.
+	 * @since 1.3.0
+	 * @var number
+	 */
+	private $_categoryNOR;
 	
 	/**
 	 * Base URL where resource are loaded from (JavaScript APIs, logos, and so on).
@@ -194,6 +212,30 @@ class Blueknow_Recommender_Model_Configuration extends Varien_Object {
 			$this->_homeNOR = Mage::getStoreConfig(self::XML_PATH_BLUEKNOW_HOME_NOR);
 		}
 		return $this->_homeNOR;
+	}
+	
+	/**
+	 * Get category-is-enabled flag from configuration.
+	 * @since 1.3.0
+	 * @return bool
+	 */
+	public function isCategoryEnabled() {
+		if (empty($this->_categoryEnabled)) {
+			$this->_categoryEnabled = Mage::getStoreConfigFlag(self::XML_PATH_BLUEKNOW_CATEGORY_ENABLED);
+		}
+		return $this->_categoryEnabled;
+	}
+	
+	/**
+	 * Get number of category recommendations from configuration.
+	 * @since 1.3.0
+	 * @return number
+	 */
+	public function getCategoryNOR() {
+		if (empty($this->_categoryNOR)) {
+			$this->_categoryNOR = Mage::getStoreConfig(self::XML_PATH_BLUEKNOW_CATEGORY_NOR);
+		}
+		return $this->_categoryNOR;
 	}
 	
 	/**

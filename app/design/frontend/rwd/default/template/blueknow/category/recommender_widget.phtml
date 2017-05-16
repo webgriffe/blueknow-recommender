@@ -1,6 +1,6 @@
 <?php
 /**
- * Template for Blueknow_Recommender_Block_Home_Recommmender.
+ * Template for Blueknow_Recommender_Block_Category_Recommmender.
  * 
  * DISCLAIMER
  *
@@ -13,11 +13,12 @@
  * @license		GNU General Public License
  * @author		<a href="mailto:santi.ameller@blueknow.com">Santiago Ameller</a>
  * @author		<a href="mailto:josep.ventura@blueknow.com">Josep M Ventura</a>
- * @since		1.2.0
+ * @since		1.3.0
  * 
  */
+//[08-03-2013] Removed height on widget images due problems with Internet explorer.
 ?>
-<div id="blueknow-widget" class="blueknow-home-widget"></div>
+<div id="blueknow-widget" class="blueknow-widget"></div>
 <?php $bConfiguration = $this->getConfig();?>
 <script id="blueknow-header" type="text/x-blueknow-template">
 	<div><h2><?php echo $this->__('We recommend to you the following products') ?></h2></div>
@@ -26,15 +27,15 @@
 	<div class="products-grid blueknow-home-products-grid">
 		<div class="blueknow-product">
 			<a href="$url" title="$name" class="product-image blueknow-home-product-image"
-				onclick="try { rec.onclick('$id','item2user','home');} catch(err) {};" >
-				<img source="$image" alt="$name" title="$name" width="115" height="auto" hspace="0" vspace="0" border="0" />
+				onclick="return rec.onclick('$id','item2category','category');" >
+				<img source="$image" alt="$name" title="$name" width="115" hspace="0" vspace="0" border="0" />
 			</a>
 			<h3 class="product-name"><a href="$url" title="$name"
-				onclick="try { rec.onclick('$id','item2user','home');} catch(err) {};">
+				onclick="return rec.onclick('$id','item2category','category');">
 				$name</a></h3>
 			<div class="price-box">
 				<span class="regular-price">
-					<span class="price">$price <?php echo $bConfiguration->getCurrentCurrency()->getSymbol() ?></span>
+					<span class="price">$price</span>
 				</span>
 			</div>
 		</div>

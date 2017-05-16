@@ -1,6 +1,6 @@
 <?php
 /**
- * Template for Blueknow_Recommender_Block_Cart_Recommmender.
+ * Template for Blueknow_Recommender_Block_Product_Recommmender.
  * 
  * DISCLAIMER
  *
@@ -21,17 +21,20 @@
 <script src="<?php echo $bConfiguration->getBaseURL() ?>/bk-r.js" type="text/javascript"></script>
 
 <script type="text/javascript">
+	window.bkCurrency = {
+		isoCode :	'<?php echo $bConfiguration->getCurrentCurrency()->getCode() ?>',
+		symbol : 	'<?php echo $bConfiguration->getCurrentCurrency()->getSymbol() ?>'
+	};
+</script>
+
+<script type="text/javascript">
 	var rec = new Blueknow.Recommender('<?php echo $bConfiguration->getBKNumber() ?>');
 	rec.setCurrency('<?php echo $bConfiguration->getCurrentCurrency()->getCode() ?>');
 	rec.setLanguage('<?php echo $bConfiguration->getLanguage() ?>');
 </script>
 
 <script type="text/javascript">
-	var i2b_properties = new Object();
-	i2b_properties.recommendations = '<?php echo $bConfiguration->getUpSellNOR() ?>';
-	var i2b_products = Array();
-	<?php foreach ($this->getCart()->getProducts() as $bProduct) { ?>
-	i2b_products.push('<?php echo $bProduct ?>');
-	<?php } //eof foreach ?>
-	rec.item2basket('cart', i2b_products, i2b_properties);
+	var i2i_properties = new Object();
+	i2i_properties.recommendations = '<?php echo $bConfiguration->getCrossSellNOR() ?>';
+	rec.item2item('product', '<?php echo $this->getProduct()->getIdentifier() ?>', i2i_properties);
 </script>
